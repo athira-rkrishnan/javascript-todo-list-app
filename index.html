@@ -9,16 +9,9 @@
 </head>
 <body>
     <div class = "container">
-        <div class = "todoapp">
-            <p id = "currDate" class = "date"></p>
-            <h3>To Do List</h3>
-            <div class = "tooltip">
-                <button class = "plusbtn"><i class="fa-solid fa-plus"></i></button>
-                <span class = "tipText">Create Task</span>
-            </div>
-
+        <div class = "overlay">
             <div class = "newTask">
-                <h4><i class="fa-solid fa-angles-right"></i>Create <span>Task</span></h4>
+                <h4><i class="fa-solid fa-angles-right"></i>Create <span>Task</span><i class="fa-solid fa-xmark" onclick = "closeTask()"></i></h4>
                 <form>
                     <div>
                         <label for = "name">Task Name:</label><input type = "text" id = "name">
@@ -29,6 +22,43 @@
                 </form>
                 <button>Add</button>
             </div>
+        </div>
+        <div class = "todoapp">
+            <p id = "currDate" class = "date"></p>
+            <h3>To Do List</h3>
+            <div class = "tooltip">
+                <button class = "plusbtn" onclick = "createTask()"><i class="fa-solid fa-plus"></i></button>
+                <span class = "tipText">Create Task</span>
+            </div>
+
+            
+
+<!--        <div class = "listContainer">
+                <div class = "tabs">
+                    <span>All</span>
+                    <span>Completed</span>
+                    <span>Pending</span>
+                </div>
+                <div class = "list">
+                    <input type = "checkbox">
+                    <div class = "task">
+                        <h6>Finish JavaScript</h6>
+                        <p>2.00pm - 3.00pm</p>
+                    </div>
+                    <div class = "editDelSec">
+                        <div>
+                            <span clas = "activeCir"></span><span>Active</span>
+                            <i class="fa-solid fa-exclamation"></i>
+                        </div>
+                        <div>
+                            <p>Edit</p>
+                            <p>Delete</p>
+                        </div>
+
+                    </div>
+                </div>
+             sjjskskskksksks
+            </div>    -->
 
 
         </div>
