@@ -85,6 +85,9 @@ function addTask() {
         listContainer.innerHTML += tasksContainer;
         const tabsContainer = document.querySelector(".tabs");
         console.log(tabsContainer);
+        if(listContainer.childElementCount > 0) {
+            tabsContainer.style.display = "block";
+        }
 
     }
 }
