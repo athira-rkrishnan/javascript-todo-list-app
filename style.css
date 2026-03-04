@@ -136,7 +136,22 @@
     float: right;
     cursor: pointer;
 }
-
+.newTask .alertText {
+    margin-top: 0.2em;
+    color: rgb(167, 30, 30);
+    animation: fadeOut 2.5s forwards; 
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1; 
+  }
+  100% {
+    opacity: 0; 
+    transition: 1.9s ease-out 0.1s;
+    height: 0;
+    overflow: hidden;
+  }
+}
 
 .todoapp {
     width: 37%;
