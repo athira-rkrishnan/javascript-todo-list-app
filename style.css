@@ -216,6 +216,7 @@
     text-align: right;
     font-weight: 400;
     margin-bottom: 1em;
+    display: none;
 }
 .listContainer .tabs span {
     margin-right: 0.4em;
