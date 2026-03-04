@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
 <body>
-    <div class = "container">
+    <div class = "container"> <!--Conatiner Start -->
+        <!-- Overlay Start -->
         <div class = "overlay">
             <div class = "newTask">
                 <h4><i class="fa-solid fa-angles-right"></i>Create <span>Task</span><i class="fa-solid fa-xmark" onclick = "closeTask()"></i></h4>
@@ -23,6 +24,8 @@
                 <button>Add</button>
             </div>
         </div>
+        <!-- Overlay End -->
+        <!-- To Do App Container Start -->
         <div class = "todoapp">
             <p id = "currDate" class = "date"></p>
             <h3>To Do List</h3>
@@ -30,19 +33,22 @@
                 <button class = "plusbtn" onclick = "createTask()"><i class="fa-solid fa-plus"></i></button>
                 <span class = "tipText">Create Task</span>
             </div>
-
             
-
-<!--        <div class = "listContainer">
+            <div class = "listContainer">
                 <div class = "tabs">
                     <span>All</span>
                     <span>Completed</span>
                     <span>Pending</span>
                 </div>
                 <div class = "list">
-                    <input type = "checkbox">
+                    <div class="checkbox-wrapper-56">
+                        <label class="checkcontainer">
+                        <input type="checkbox" id = "myCheckbox">
+                        <div class="checkmark"></div>
+                        </label>
+                    </div>
                     <div class = "task">
-                        <h6>Finish JavaScript</h6>
+                        <label>Finish JavaScript</label>
                         <p>2.00pm - 3.00pm</p>
                     </div>
                     <div class = "editDelSec">
@@ -54,15 +60,61 @@
                             <p>Edit</p>
                             <p>Delete</p>
                         </div>
-
                     </div>
                 </div>
-             sjjskskskksksks
-            </div>    -->
+
+                <div class = "list">
+                    <div class="checkbox-wrapper-56">
+                        <label class="checkcontainer">
+                        <input type="checkbox" id = "myCheckbox">
+                        <div class="checkmark"></div>
+                        </label>
+                    </div>
+                    <div class = "task">
+                        <label>Finish JavaScript</label>
+                        <p>2.00pm - 3.00pm</p>
+                    </div>
+                    <div class = "editDelSec">
+                        <div>
+                            <span clas = "activeCir"></span><span>Active</span>
+                            <i class="fa-solid fa-exclamation"></i>
+                        </div>
+                        <div>
+                            <p>Edit</p>
+                            <p>Delete</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "list">
+                    <div class="checkbox-wrapper-56">
+                        <label class="checkcontainer">
+                        <input type="checkbox" id = "myCheckbox">
+                        <div class="checkmark"></div>
+                        </label>
+                    </div>
+                    <div class = "task">
+                        <label>Finish JavaScript</label>
+                        <p>2.00pm - 3.00pm</p>
+                    </div>
+                    <div class = "editDelSec">
+                        <div>
+                            <span clas = "activeCir"></span><span>Active</span>
+                            <i class="fa-solid fa-exclamation"></i>
+                        </div>
+                        <div>
+                            <p>Edit</p>
+                            <p>Delete</p>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>    
 
 
         </div>
-    </div>
+        <!-- To Do App Container End -->
+    </div> <!--Conatiner End -->
 
 
     <script src = "script.js"></script>
