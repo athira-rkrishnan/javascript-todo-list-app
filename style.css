@@ -139,7 +139,7 @@
 
 
 .todoapp {
-    width: 35%;
+    width: 37%;
     height: auto;
     text-align: center;
     padding: 1.3em;
@@ -194,12 +194,13 @@
 
 
 .todoapp .listContainer {
-   /* background-color: gray; */
+  /*  background-color: gray; */
     margin-top: 3em;
 }
 .listContainer .tabs {
     text-align: right;
     font-weight: 400;
+    margin-bottom: 1em;
 }
 .listContainer .tabs span {
     margin-right: 0.4em;
@@ -275,3 +276,86 @@
     border-width: 0 0.15em 0.15em 0;
     transform: rotate(45deg);
 }
+
+.list .task {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-basis: 65%;
+ /*   background-color: yellow;  */
+}
+.list .task label {
+    font-size: 1em;
+    font-weight: 600;
+    color: #232323;
+    line-height: 1.4;
+}
+.list .task p {
+    font-size: 0.8em;
+    font-weight: 500;
+    font-style: italic;
+    color: #454444;
+}
+.list .task p i {
+    font-size: 1em;
+    font-weight: 500;
+    color: #454444;
+    margin-right: 0.2em;
+     font-style: italic;
+}
+
+.list .editDelSec {
+    display: flex;
+    flex-basis: 22%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+ /*   background-color: rgb(58, 58, 14);   */
+     padding: 0.2em 0.7em;
+}
+
+.list .editDelSec .actExc {
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+}
+
+.list .editDelSec div .activeCir {
+    user-select: none;
+}
+.list .editDelSec div .activeCir::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: -10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: limegreen;
+}
+
+.list .editDelSec .actExc .fa-exclamation {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(130, 74, 5);
+    color: white;
+    font-size: 0.8em;
+    margin-left: 1.3em;
+    cursor: pointer;
+}
+.list .editDelSec .edDEL {
+    padding: 0.2em 0em;
+}
+.list .editDelSec .edDEL span {
+    cursor: pointer;
+}
+.list .editDelSec .edDEL .del {
+    margin-left: 0.7em;
+}
+
