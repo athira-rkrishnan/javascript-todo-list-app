@@ -58,9 +58,14 @@ function addTask() {
 
     }
     else {    
-        closeTask();
-             
-        const tasksContainer = `
+        if(editTask) {
+            editTask.querySelector("#tName").textContent = inputName.value;
+            editTask.querySelector("#tTime").innerHTML =
+                    `<i class="fa-regular fa-clock"></i>${inputTime.value}`;
+            editTask = null;
+        }
+        else {
+            const tasksContainer = `
                 <div class = "list">
                     <div class="checkbox-wrapper-56">
                         <label class="checkcontainer">
@@ -87,14 +92,19 @@ function addTask() {
         listContainer.innerHTML += tasksContainer;
         if(listContainer.childElementCount > 0) {
             tabsSec.style.display = "block";
-            }       
+            }  
+        }
+
+        creEditText.textContent = "Create";
+        taskBtn.textContent = "Add";
+        closeTask();
+             
+             
     }
 }
 
 listContainer.addEventListener("click", function(e) {
-
-    if(e.target.classList.contains("edit")) {
-     
+    if(e.target.classList.contains("edit")) {    
         const list = e.target.closest(".list");
         const taskName = list.querySelector("#tName").textContent;
         const taskTime = list.querySelector("#tTime").textContent;
@@ -104,8 +114,6 @@ listContainer.addEventListener("click", function(e) {
         createTask();
         creEditText.textContent = "Edit";
         taskBtn.textContent = "Save";
-         
-    }
-    
+    } 
 });
 
