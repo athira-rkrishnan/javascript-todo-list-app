@@ -18,16 +18,21 @@ const inputName = document.querySelector("#name");
 const inputTime = document.querySelector("#time");
 
 const todoApp = document.querySelector(".todoapp");
+const tabsSec = document.querySelector(".tabs");
+const listContainer = document.querySelector(".listContainer");
 const tListName = document.getElementById("tName");
 const tListTime = document.getElementById("tTime");
-const listContainer = document.querySelector(".listContainer");
 
-const tabsSec = document.querySelector(".tabs");
+
+const creEditText = document.getElementById("creEditText");
+const taskBtn = document.getElementById("taskBtn");
+let editTask = null;
 
    
 function createTask() {
     overLay.classList.add('active');
-    newTask.style.display = "block";  
+    newTask.style.display = "block"; 
+    creEditText.style.color = "white"; 
 }
 
 function closeTask() {
@@ -39,10 +44,8 @@ function closeTask() {
 
 function addTask() {
     const inNameValue = inputName.value;
-    console.log(inNameValue);
     const inTimeValue = inputTime.value;
-    console.log(inTimeValue);
-   
+      
 
     if(inputName.value === '' || inputTime.value === '') {
         let alertTxt = document.createElement("p");
@@ -82,15 +85,27 @@ function addTask() {
                 </div> `;
                       
         listContainer.innerHTML += tasksContainer;
-
         if(listContainer.childElementCount > 0) {
             tabsSec.style.display = "block";
-            }
-       
-        const lists = document.querySelectorAll(".list");
-        const delBtn = document.querySelectorAll(".del");
-        
-            
+            }       
     }
 }
+
+listContainer.addEventListener("click", function(e) {
+
+    if(e.target.classList.contains("edit")) {
+     
+        const list = e.target.closest(".list");
+        const taskName = list.querySelector("#tName").textContent;
+        const taskTime = list.querySelector("#tTime").textContent;
+        inputName.value = taskName;
+        inputTime.value = taskTime;
+        editTask = list;
+        createTask();
+        creEditText.textContent = "Edit";
+        taskBtn.textContent = "Save";
+         
+    }
+    
+});
 

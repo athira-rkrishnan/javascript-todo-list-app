@@ -12,7 +12,7 @@
         <!-- Overlay Start -->
         <div class = "overlay">
             <div class = "newTask">
-                <h4><i class="fa-solid fa-angles-right"></i>Create <span>Task</span><i class="fa-solid fa-xmark" onclick = "closeTask()"></i></h4>
+                <h4><i class="fa-solid fa-angles-right"></i><span id="creEditText">Create</span> <span>Task</span><i class="fa-solid fa-xmark" onclick = "closeTask()"></i></h4>
                 <form>
                     <div>
                         <label for = "name">Task Name:</label><input type = "text" id = "name">
@@ -21,7 +21,7 @@
                         <label for = "time">Task Time:</label><input type = "text" id = "time">
                     </div>
                 </form>
-                <button onclick = "addTask()">Add</button>
+                <button onclick = "addTask()" id="taskBtn">Add</button>
             </div>
         </div>
         <!-- Overlay End -->
