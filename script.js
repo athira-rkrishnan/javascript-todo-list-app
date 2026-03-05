@@ -115,5 +115,10 @@ listContainer.addEventListener("click", function(e) {
         creEditText.textContent = "Edit";
         taskBtn.textContent = "Save";
     } 
+    else if(e.target.classList.contains("del")) {
+        const list = e.target.closest(".list");
+        list.remove();
+    }
+
 });
 
