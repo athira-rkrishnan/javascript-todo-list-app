@@ -216,6 +216,16 @@
 }
 .todoapp .tabs span {
     margin-right: 0.4em;
+    user-select: none;
+    cursor: pointer;
+}
+.todoapp .tabs span.active {
+    color:rgb(68, 109, 3);
+    font-weight: bold;
+    padding: 0.1em 0.2em;
+    border-radius: 0.5em;
+    border: 1px solid rgb(238, 238, 238);
+    box-shadow: rgba(123, 124, 125, 0.3) 0px 1px 2px 0px, rgba(130, 131, 131, 0.15) 0px 1px 3px 1px;
 }
 
 
