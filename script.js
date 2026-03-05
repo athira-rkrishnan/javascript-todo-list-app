@@ -22,6 +22,8 @@ const tListName = document.getElementById("tName");
 const tListTime = document.getElementById("tTime");
 const listContainer = document.querySelector(".listContainer");
 
+const tabsSec = document.querySelector(".tabs");
+
    
 function createTask() {
     overLay.classList.add('active');
@@ -53,13 +55,9 @@ function addTask() {
 
     }
     else {    
-            closeTask();
-          
-      const tasksContainer = `<div class = "tabs">
-                    <span>All</span>
-                    <span>Completed</span>
-                    <span>Pending</span>
-                </div>
+        closeTask();
+             
+        const tasksContainer = `
                 <div class = "list">
                     <div class="checkbox-wrapper-56">
                         <label class="checkcontainer">
@@ -77,20 +75,22 @@ function addTask() {
                             <i class="fa-solid fa-exclamation"></i>
                         </div>
                         <div class = "edDEL">
-                            <span>Edit</span>
+                            <span class = "edit">Edit</span>
                             <span class = "del">Delete</span>
                         </div>
-                    </div>`;  
+                    </div>
+                </div> `;
                       
         listContainer.innerHTML += tasksContainer;
-        const tabsContainer = document.querySelector(".tabs");
-        console.log(tabsContainer);
-        if(listContainer.childElementCount > 0) {
-            tabsContainer.style.display = "block";
-        }
 
+        if(listContainer.childElementCount > 0) {
+            tabsSec.style.display = "block";
+            }
+       
+        const lists = document.querySelectorAll(".list");
+        const delBtn = document.querySelectorAll(".del");
+        
+            
     }
 }
 
-
-                   

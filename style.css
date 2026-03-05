@@ -208,19 +208,22 @@
 }
 
 
-.todoapp .listContainer {
-  /*  background-color: gray; */
-    margin-top: 3em;
-}
-.listContainer .tabs {
+.todoapp .tabs {
     text-align: right;
     font-weight: 400;
-    margin-bottom: 1em;
+   /* margin-bottom: 1em; */
     display: none;
 }
-.listContainer .tabs span {
+.todoapp .tabs span {
     margin-right: 0.4em;
 }
+
+
+.todoapp .listContainer {
+  /*  background-color: gray; */
+    margin-top: 1em;
+}
+
 .listContainer .list {
     background-color: white;
     display: flex;
@@ -231,7 +234,7 @@
     margin-bottom: 1em;
 }
 
-
+/* Custom Checkbox */
 .checkbox-wrapper-56 *,
 .checkbox-wrapper-56 ::after,
 .checkbox-wrapper-56 ::before {
@@ -261,7 +264,6 @@
     justify-content: center;
     align-items: center;
 }
-
 .checkbox-wrapper-56 .checkcontainer input::after {
     transition: .5s;
     font-family: monospace;
@@ -276,7 +278,6 @@
     border-width: 0 0.15em 0.15em 0;
     transform: rotate(45deg);
 }
-
 .checkbox-wrapper-56 .checkcontainer input:checked {
     background-color: rgba(14, 12, 11, 0.8);
     box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
@@ -285,7 +286,6 @@
     inset 10px 10px 15px rgba(70,70,70,0.12);
     transition: .5s;
 }
-
 .checkbox-wrapper-56 .checkcontainer input:checked::after {
     transition: .5s;
     border: solid rgb(119, 188, 7);
