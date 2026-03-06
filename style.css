@@ -395,3 +395,32 @@ body {
     margin-left: 0.7em;
 }
 
+.finishMsg {
+    background-color: #242424;
+    color: rgb(150, 147, 147);
+    font-size: 1em;
+    font-weight: 600;
+    width: 15em;
+    height: 1.5em;
+    padding: 1.5em 0.6em;
+    border-radius: 0.6em;
+    border: 1px solid rgb(187, 187, 5);
+    position: absolute;
+    top: 0.4em;
+    right: 0.4em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    user-select: none;
+    visibility: hidden;
+}
+
+.finishMsg .fa-triangle-exclamation {
+    color: rgb(137, 137, 6);
+    margin-right: 0.5em;
+}
+.finishMsg .fa-xmark {
+    color: rgb(137, 137, 6);
+    margin-left: 3em;
+    cursor: pointer;
+}

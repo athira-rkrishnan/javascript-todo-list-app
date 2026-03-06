@@ -32,7 +32,6 @@ const completedContainer =  document.querySelector(".completedContainer");
 const pendingContainer =  document.querySelector(".pendingContainer");
 
 
-
 const creEditText = document.getElementById("creEditText");
 const taskBtn = document.getElementById("taskBtn");
 let editTask = null;
@@ -104,12 +103,22 @@ function addTask() {
             allTab.classList.add("active");
             }  
         }
-
+     
         creEditText.textContent = "Create";
         taskBtn.textContent = "Add";
         closeTask();
-             
-             
+        const finishMsg = document.getElementById("finishMsg");
+        const alertClose = document.querySelector(".alertClose");
+        if(listContainer.childElementCount > 6) {
+            finishMsg.style.visibility = "visible";
+            alertClose.onclick = () => {
+                finishMsg.style.visibility = "hidden";
+            }
+        }
+        else {
+            finishMsg.style.visibility = "hidden";
+        }
+                      
     }
 }
 
