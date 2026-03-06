@@ -7,6 +7,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    height: 100vh;
+    overflow: hidden;
+}
 .container {
     background: rgb(79, 111, 4);
     background: linear-gradient(90deg, rgb(68, 109, 3), rgb(119, 188, 7));
@@ -225,8 +229,14 @@
     padding: 0.1em 0.2em;
     border-radius: 0.5em;
     border: 1px solid rgb(238, 238, 238);
-    box-shadow: rgba(123, 124, 125, 0.3) 0px 1px 2px 0px, rgba(130, 131, 131, 0.15) 0px 1px 3px 1px;
+    box-shadow: rgba(123, 124, 125, 0.3) 0px 1px 2px 0px, rgba(96, 98, 98, 0.15) 0px 1px 3px 1px;
 }
+
+
+.pendingContainer {
+    display: none;
+}
+
 
 
 .todoapp .listContainer {

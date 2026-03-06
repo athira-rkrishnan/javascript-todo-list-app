@@ -18,10 +18,19 @@ const inputName = document.querySelector("#name");
 const inputTime = document.querySelector("#time");
 
 const todoApp = document.querySelector(".todoapp");
-const tabsSec = document.querySelector(".tabs");
+
 const listContainer = document.querySelector(".listContainer");
 const tListName = document.getElementById("tName");
 const tListTime = document.getElementById("tTime");
+
+const tabsSec = document.querySelector(".tabs");
+const allTab = document.querySelector(".allTab");
+const completeTab = document.querySelector(".completeTab");
+const pendingTab = document.querySelector(".pendingTab");
+const allContainer =  document.querySelector(".allContainer");
+const completedContainer =  document.querySelector(".completedContainer");
+const pendingContainer =  document.querySelector(".pendingContainer");
+
 
 
 const creEditText = document.getElementById("creEditText");
@@ -92,6 +101,7 @@ function addTask() {
         listContainer.innerHTML += tasksContainer;
         if(listContainer.childElementCount > 0) {
             tabsSec.style.display = "block";
+            allTab.classList.add("active");
             }  
         }
 
@@ -119,6 +129,22 @@ listContainer.addEventListener("click", function(e) {
         const list = e.target.closest(".list");
         list.remove();
     }
+    else if(e.target.classList.contains("fa-exclamation")) {
+        const list = e.target.closest(".list");
+    }
 
+});
+
+
+tabsSec.addEventListener("click", function(e) {
+    if(e.target.classList.contains("allTab")) {
+        allContainer.appendChild(listContainer);
+        allTab.classList.add("active");
+        completeTab.classList.remove("active");
+        pendingTab.classList.remove("active");
+        allContainer.style.display = "block";
+        completedContainer.style.display = "none";
+        pendingContainer.style.display = "none";
+    }
 });
 
