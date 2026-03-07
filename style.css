@@ -395,6 +395,40 @@ body {
     margin-left: 0.7em;
 }
 
+
+.completedContainer .compLists {
+     margin-top: 1em;
+}
+.completedContainer .compLists .compTask {
+    background-color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 0.2em;
+    margin-bottom: 1em;
+    padding: 0.3em;
+    font-size: 1em;
+    font-weight: 500;
+    color: rgb(61, 57, 57);
+    user-select: none;
+}
+.compLists .compTask i {
+    color:rgb(68, 109, 3);
+    margin-right: 0.5em;
+    user-select: none;
+}
+.compLists .clear {
+    border: 1px solid white;;
+    padding: 0.2em;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.compLists .clear .fa-trash-can {
+    color: rgb(70, 66, 66);
+    margin-right: 0.2em;
+}
+
 .finishMsg {
     background-color: #242424;
     color: rgb(150, 147, 147);
@@ -424,3 +458,5 @@ body {
     margin-left: 3em;
     cursor: pointer;
 }
+
+

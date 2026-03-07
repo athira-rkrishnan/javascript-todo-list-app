@@ -47,8 +47,7 @@ function createTask() {
         finishMsg.style.visibility = "visible";
         alertClose.onclick = () => {
             finishMsg.style.visibility = "hidden";
-        }
-            
+        }       
     }
     else {
         overLay.classList.add('active');
@@ -118,12 +117,9 @@ function addTask() {
             allTab.classList.add("active");
             }  
         }
-     
         creEditText.textContent = "Create";
         taskBtn.textContent = "Add";
-        closeTask();
-        
-                      
+        closeTask();                 
     }
 }
 
@@ -142,13 +138,21 @@ listContainer.addEventListener("click", function(e) {
     else if(e.target.classList.contains("del")) {
         const list = e.target.closest(".list");
         list.remove();
-
-
     }
     else if(e.target.classList.contains("fa-exclamation")) {
         const list = e.target.closest(".list");
     }
-
+    else if(e.target.type === "checkbox") {
+        const list = e.target.closest(".list");
+        const taskName = list.querySelector("#tName").textContent;
+        if(e.target.checked) {
+            const completeTasks = `<div class = "compLists">
+                <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
+                </div>`;
+            completedContainer.innerHTML += completeTasks;
+            list.remove();
+        }
+    }
 });
 
 
@@ -161,6 +165,14 @@ tabsSec.addEventListener("click", function(e) {
         allContainer.style.display = "block";
         completedContainer.style.display = "none";
         pendingContainer.style.display = "none";
+    }
+    else if(e.target.classList.contains("completeTab")) {
+        completeTab.classList.add("active");
+        allTab.classList.remove("active");
+        pendingTab.classList.remove("active");    
+        completedContainer.style.display = "block";
+        allContainer.style.display = "none";
+        pendingContainer.style.display = "none";   
     }
 });
 
