@@ -41,7 +41,7 @@ const finishMsg = document.getElementById("finishMsg");
 const alertClose = document.querySelector(".alertClose");
    
 function createTask() {
-    if(listContainer.childElementCount == 6) {
+    if(listContainer.childElementCount >= 6 && editTask === null) {
         overLay.classList.remove('active');
         newTask.style.display = "none";
         finishMsg.style.visibility = "visible";
