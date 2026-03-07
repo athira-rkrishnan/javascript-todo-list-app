@@ -36,11 +36,26 @@ const creEditText = document.getElementById("creEditText");
 const taskBtn = document.getElementById("taskBtn");
 let editTask = null;
 
+
+const finishMsg = document.getElementById("finishMsg");
+const alertClose = document.querySelector(".alertClose");
    
 function createTask() {
-    overLay.classList.add('active');
-    newTask.style.display = "block"; 
-    creEditText.style.color = "white"; 
+    if(listContainer.childElementCount == 6) {
+        overLay.classList.remove('active');
+        newTask.style.display = "none";
+        finishMsg.style.visibility = "visible";
+        alertClose.onclick = () => {
+            finishMsg.style.visibility = "hidden";
+        }
+            
+    }
+    else {
+        overLay.classList.add('active');
+        newTask.style.display = "block"; 
+        creEditText.style.color = "white"; 
+        finishMsg.style.visibility = "hidden";
+    }
 }
 
 function closeTask() {
@@ -107,17 +122,7 @@ function addTask() {
         creEditText.textContent = "Create";
         taskBtn.textContent = "Add";
         closeTask();
-        const finishMsg = document.getElementById("finishMsg");
-        const alertClose = document.querySelector(".alertClose");
-        if(listContainer.childElementCount > 6) {
-            finishMsg.style.visibility = "visible";
-            alertClose.onclick = () => {
-                finishMsg.style.visibility = "hidden";
-            }
-        }
-        else {
-            finishMsg.style.visibility = "hidden";
-        }
+        
                       
     }
 }
@@ -137,6 +142,8 @@ listContainer.addEventListener("click", function(e) {
     else if(e.target.classList.contains("del")) {
         const list = e.target.closest(".list");
         list.remove();
+
+
     }
     else if(e.target.classList.contains("fa-exclamation")) {
         const list = e.target.closest(".list");
