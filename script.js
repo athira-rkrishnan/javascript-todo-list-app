@@ -146,11 +146,14 @@ listContainer.addEventListener("click", function(e) {
         const list = e.target.closest(".list");
         const taskName = list.querySelector("#tName").textContent;
         if(e.target.checked) {
-            const completeTasks = `<div class = "compLists">
-                <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
-                </div>`;
-            completedContainer.innerHTML += completeTasks;
-            list.remove();
+            setTimeout(() => {
+                const completeTasks = `<div class = "compLists">
+                    <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
+                    </div>`; 
+                completedContainer.innerHTML += completeTasks;
+                list.remove();
+            }, 2000);
+            completedContainer.style.display = "none";
         }
     }
 });
