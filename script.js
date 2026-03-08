@@ -150,7 +150,18 @@ listContainer.addEventListener("click", function(e) {
                 const completeTasks = `<div class = "compLists">
                     <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
                     </div>`; 
+                
                 completedContainer.innerHTML += completeTasks;
+                const completedCount = completedContainer.querySelectorAll(".compLists").length;
+                if(completedCount > 7 && !document.querySelector(".clear")) {
+                    const clearBtn = document.createElement("button");
+                    clearBtn.classList.add("clear");
+                    clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
+                    completedContainer.appendChild(clearBtn);
+                    clearBtn.addEventListener("click", () => {
+                        completedContainer.innerHTML = "";
+                    });  
+                }
                 list.remove();
             }, 2000);
             completedContainer.style.display = "none";
