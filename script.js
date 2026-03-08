@@ -149,6 +149,7 @@ listContainer.addEventListener("click", function(e) {
 
             const completedCount = completedContainer.querySelectorAll(".compLists").length;
             if(completedCount > 7) {
+                pendingCompletedTask = list;
                 finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Clear Completed Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
                 finishMsg.style.visibility = "visible";
                 finishMsg.addEventListener("click", (e) => {
@@ -156,12 +157,12 @@ listContainer.addEventListener("click", function(e) {
                         finishMsg.style.visibility = "hidden";
                     }
                 });
-                return;
-                if(completedCount === 0) {
-                    list.remove();
-                }
+                return;   
             }
-          
+            moveToCompleted(list, taskName);
+        }
+        
+        function moveToCompleted(list, taskName) {
             setTimeout(() => {
                 const completeTasks = `<div class = "compLists">
                     <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
@@ -177,14 +178,19 @@ listContainer.addEventListener("click", function(e) {
                     completedContainer.appendChild(clearBtn);
                     clearBtn.addEventListener("click", () => {
                         completedContainer.innerHTML = "";
+                        if(pendingCompletedTask) {
+                            const taskName = pendingCompletedTask.querySelector(".tName").textContent;
+                            moveToCompleted(pendingCompletedTask, taskName);
+                            pendingCompletedTask = null;
+                        }
                     });  
                 }
                 list.remove();
             }, 2000);    
             completedContainer.style.display = "none";
+        }
         
     }
-            }
 
             
 });
