@@ -20,8 +20,8 @@ const inputTime = document.querySelector("#time");
 const todoApp = document.querySelector(".todoapp");
 
 const listContainer = document.querySelector(".listContainer");
-const tListName = document.getElementById("tName");
-const tListTime = document.getElementById("tTime");
+const tListName = document.querySelector("tName");
+const tListTime = document.querySelector("tTime");
 
 const tabsSec = document.querySelector(".tabs");
 const allTab = document.querySelector(".allTab");
@@ -81,8 +81,8 @@ function addTask() {
     }
     else {    
         if(editTask) {
-            editTask.querySelector("#tName").textContent = inputName.value;
-            editTask.querySelector("#tTime").innerHTML =
+            editTask.querySelector(".tName").textContent = inputName.value;
+            editTask.querySelector(".tTime").innerHTML =
                     `<i class="fa-regular fa-clock"></i>${inputTime.value}`;
             editTask = null;
         }
@@ -96,8 +96,8 @@ function addTask() {
                         </label>
                     </div>
                     <div class = "task">
-                        <label for = "myCheckbox" id = "tName">${inNameValue}</label>
-                        <p id = "tTime"><i class="fa-regular fa-clock"></i>${inTimeValue}</p>
+                        <label for = "myCheckbox" class = "tName">${inNameValue}</label>
+                        <p class = "tTime"><i class="fa-regular fa-clock"></i>${inTimeValue}</p>
                     </div>
                     <div class = "editDelSec">
                         <div class = "actExc">
@@ -126,8 +126,8 @@ function addTask() {
 listContainer.addEventListener("click", function(e) {
     if(e.target.classList.contains("edit")) {    
         const list = e.target.closest(".list");
-        const taskName = list.querySelector("#tName").textContent;
-        const taskTime = list.querySelector("#tTime").textContent;
+        const taskName = list.querySelector(".tName").textContent;
+        const taskTime = list.querySelector(".tTime").textContent;
         inputName.value = taskName;
         inputTime.value = taskTime;
         editTask = list;
@@ -144,16 +144,33 @@ listContainer.addEventListener("click", function(e) {
     }
     else if(e.target.type === "checkbox") {
         const list = e.target.closest(".list");
-        const taskName = list.querySelector("#tName").textContent;
+        const taskName = list.querySelector(".tName").textContent;
         if(e.target.checked) {
+
+            const completedCount = completedContainer.querySelectorAll(".compLists").length;
+            if(completedCount > 7) {
+                finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Clear Completed Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
+                finishMsg.style.visibility = "visible";
+                finishMsg.addEventListener("click", (e) => {
+                    if(e.target.classList.contains("alertClose")) {
+                        finishMsg.style.visibility = "hidden";
+                    }
+                });
+                return;
+                if(completedCount === 0) {
+                    list.remove();
+                }
+            }
+          
             setTimeout(() => {
                 const completeTasks = `<div class = "compLists">
                     <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
                     </div>`; 
                 
                 completedContainer.innerHTML += completeTasks;
-                const completedCount = completedContainer.querySelectorAll(".compLists").length;
-                if(completedCount > 7 && !document.querySelector(".clear")) {
+                const newCompletedCount = completedContainer.querySelectorAll(".compLists").length;
+
+                if(newCompletedCount > 7 && !document.querySelector(".clear")) {
                     const clearBtn = document.createElement("button");
                     clearBtn.classList.add("clear");
                     clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
@@ -163,10 +180,13 @@ listContainer.addEventListener("click", function(e) {
                     });  
                 }
                 list.remove();
-            }, 2000);
+            }, 2000);    
             completedContainer.style.display = "none";
-        }
+        
     }
+            }
+
+            
 });
 
 
