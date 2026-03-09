@@ -145,6 +145,25 @@ listContainer.addEventListener("click", function(e) {
     }
     else if(e.target.classList.contains("fa-exclamation")) {
         const list = e.target.closest(".list");
+        const taskName = list.querySelector(".tName").textContent;
+        const pendingLists = `<div class = "pendingList">
+                    <p id = "pendingTask" class = "pendingTask">${taskName}</p>
+                    <button class = "pendingBtn">Restore</button>
+                </div>`;
+        pendingContainer.innerHTML += pendingLists;
+        if(pendingContainer.childElementCount >=8) {
+            selectedPendingTask = list;
+            finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish Pending Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
+                finishMsg.style.visibility = "visible";
+                finishMsg.addEventListener("click", (e) => {
+                    if(e.target.classList.contains("alertClose")) {
+                        finishMsg.style.visibility = "hidden";
+                    }
+                });
+                return;  
+        }
+        
+        list.remove();
     }
     else if(e.target.type === "checkbox") {
         const list = e.target.closest(".list");
@@ -153,7 +172,7 @@ listContainer.addEventListener("click", function(e) {
 
             const completedCount = completedContainer.querySelectorAll(".compLists").length;
             if(completedCount > 7) {
-                pendingCompletedTask = list;
+                waitingCompletedTask = list;
                 finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Clear Completed Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
                 finishMsg.style.visibility = "visible";
                 finishMsg.addEventListener("click", (e) => {
@@ -182,10 +201,10 @@ listContainer.addEventListener("click", function(e) {
                     completedContainer.appendChild(clearBtn);
                     clearBtn.addEventListener("click", () => {
                         completedContainer.innerHTML = "";
-                        if(pendingCompletedTask) {
-                            const taskName = pendingCompletedTask.querySelector(".tName").textContent;
-                            moveToCompleted(pendingCompletedTask, taskName);
-                            pendingCompletedTask = null;
+                        if(waitingCompletedTask) {
+                            const taskName = waitingCompletedTask.querySelector(".tName").textContent;
+                            moveToCompleted(waitingCompletedTask, taskName);
+                            waitingCompletedTask = null;
                         }
                     });   
                 }
