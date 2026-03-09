@@ -215,6 +215,14 @@ tabsSec.addEventListener("click", function(e) {
         allContainer.style.display = "none";
         pendingContainer.style.display = "none";   
     }
+    else if(e.target.classList.contains("pendingTab")) {
+        pendingTab.classList.add("active");
+        allTab.classList.remove("active");
+        completeTab.classList.remove("active");
+        pendingContainer.style.display = "block";
+        allContainer.style.display = "none";
+        completedContainer.style.display = "none";
+    }
 });
 
 
