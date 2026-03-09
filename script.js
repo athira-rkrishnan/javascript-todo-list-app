@@ -44,10 +44,14 @@ function createTask() {
     if(listContainer.childElementCount >= 6 && editTask === null) {
         overLay.classList.remove('active');
         newTask.style.display = "none";
+        finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks
+        <i class="fa-solid fa-xmark alertClose"></i>`;
         finishMsg.style.visibility = "visible";
-        alertClose.onclick = () => {
-            finishMsg.style.visibility = "hidden";
-        }       
+        finishMsg.addEventListener("click", (e) => {
+            if(e.target.classList.contains("alertClose")) {
+                finishMsg.style.visibility = "hidden";
+            }
+        });   
     }
     else {
         overLay.classList.add('active');
@@ -183,16 +187,13 @@ listContainer.addEventListener("click", function(e) {
                             moveToCompleted(pendingCompletedTask, taskName);
                             pendingCompletedTask = null;
                         }
-                    });  
+                    });   
                 }
                 list.remove();
             }, 2000);    
             completedContainer.style.display = "none";
         }
-        
-    }
-
-            
+    }         
 });
 
 
@@ -215,4 +216,5 @@ tabsSec.addEventListener("click", function(e) {
         pendingContainer.style.display = "none";   
     }
 });
+
 
