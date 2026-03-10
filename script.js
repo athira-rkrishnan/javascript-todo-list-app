@@ -146,11 +146,6 @@ listContainer.addEventListener("click", function(e) {
     else if(e.target.classList.contains("fa-exclamation")) {
         const list = e.target.closest(".list");
         const taskName = list.querySelector(".tName").textContent;
-        const pendingLists = `<div class = "pendingList">
-                    <p id = "pendingTask" class = "pendingTask">${taskName}</p>
-                    <button class = "pendingBtn">Restore</button>
-                </div>`;
-        pendingContainer.innerHTML += pendingLists;
         if(pendingContainer.childElementCount >=8) {
             selectedPendingTask = list;
             finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish Pending Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
@@ -162,7 +157,11 @@ listContainer.addEventListener("click", function(e) {
                 });
                 return;  
         }
-        
+        const pendingLists = `<div class = "pendingList">
+                    <p id = "pendingTask" class = "pendingTask">${taskName}</p>
+                    <button class = "pendingBtn">Restore</button>
+                </div>`;
+        pendingContainer.innerHTML += pendingLists;
         list.remove();
     }
     else if(e.target.type === "checkbox") {
