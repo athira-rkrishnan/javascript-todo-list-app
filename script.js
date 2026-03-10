@@ -157,12 +157,13 @@ listContainer.addEventListener("click", function(e) {
                 });
                 return;  
         }
-        const pendingLists = `<div class = "pendingList">
-                    <p id = "pendingTask" class = "pendingTask">${taskName}</p>
-                    <button class = "pendingBtn">Restore</button>
-                </div>`;
-        pendingContainer.innerHTML += pendingLists;
-        list.remove();
+        const pendingListDiv = document.createElement("div");
+        pendingListDiv.classList.add("pendingList");
+        pendingListDiv.innerHTML = `<p id = "pendingTask" class = "pendingTask">${taskName}</p>
+                                    <button class = "pendingBtn">Return & Finish</button>`;
+        pendingListDiv.listRef = list;
+        pendingContainer.appendChild(pendingListDiv);
+        list.remove();    
     }
     else if(e.target.type === "checkbox") {
         const list = e.target.closest(".list");
@@ -240,6 +241,15 @@ tabsSec.addEventListener("click", function(e) {
         pendingContainer.style.display = "block";
         allContainer.style.display = "none";
         completedContainer.style.display = "none";
+    }
+});
+
+pendingContainer.addEventListener("click", (e) => {
+    if(e.target.classList.contains("pendingBtn")) {
+        const pendingListDiv = e.target.closest(".pendingList");
+        const originalTask = pendingListDiv.listRef;
+        listContainer.appendChild(originalTask);
+        pendingListDiv.remove();
     }
 });
 
