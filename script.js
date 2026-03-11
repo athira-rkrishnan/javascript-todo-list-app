@@ -117,6 +117,7 @@ function addTask() {
                       
         listContainer.innerHTML += tasksContainer;
         updateActiveTasks();
+        saveTasksToLocalStorage();
         if(listContainer.childElementCount > 0) {
             tabsSec.style.display = "block";
             allTab.classList.add("active");
@@ -177,10 +178,12 @@ listContainer.addEventListener("click", function(e) {
         createTask();
         creEditText.textContent = "Edit";
         taskBtn.textContent = "Save";
+        saveTasksToLocalStorage();
     } 
     else if(e.target.classList.contains("del")) {
         const list = e.target.closest(".list");
         list.remove();
+        saveTasksToLocalStorage();
     }
     else if(e.target.classList.contains("fa-exclamation")) {
         const list = e.target.closest(".list");
@@ -250,6 +253,7 @@ listContainer.addEventListener("click", function(e) {
                 list.remove();
             }, 2000);    
             completedContainer.style.display = "none";
+            saveTasksToLocalStorage();
         }
     }         
 });
@@ -264,6 +268,7 @@ tabsSec.addEventListener("click", function(e) {
         allContainer.style.display = "block";
         completedContainer.style.display = "none";
         pendingContainer.style.display = "none";
+        
     }
     else if(e.target.classList.contains("completeTab")) {
         completeTab.classList.add("active");
@@ -271,7 +276,8 @@ tabsSec.addEventListener("click", function(e) {
         pendingTab.classList.remove("active");    
         completedContainer.style.display = "block";
         allContainer.style.display = "none";
-        pendingContainer.style.display = "none";   
+        pendingContainer.style.display = "none"; 
+         
     }
     else if(e.target.classList.contains("pendingTab")) {
         pendingTab.classList.add("active");
@@ -280,6 +286,7 @@ tabsSec.addEventListener("click", function(e) {
         pendingContainer.style.display = "block";
         allContainer.style.display = "none";
         completedContainer.style.display = "none";
+        
     }
 });
 
@@ -292,8 +299,64 @@ pendingContainer.addEventListener("click", (e) => {
     }
 });
 
+function saveTasksToLocalStorage() {
+    const tasks = [];
+    const lists = document.querySelectorAll(".list");
+
+    lists.forEach(list => {
+        const name = list.querySelector(".tName").textContent;
+        const time = list.querySelector(".tTime").textContent.trim();
+        const completed = list.querySelector('input[type="checkbox"]').checked;
+
+        tasks.push({
+            name,
+            time,
+            completed
+        });
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasksFromLocalStorage() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks.forEach(task => {
+        const tasksContainer = `
+            <div class="list">
+                <div class="checkbox-wrapper-56">
+                    <label class="checkcontainer">
+                        <input type="checkbox" ${task.completed ? "checked" : ""}>
+                        <div class="checkmark"></div>
+                    </label>
+                </div>
+                <div class="task">
+                    <label class="tName">${task.name}</label>
+                    <p class="tTime"><i class="fa-regular fa-clock"></i>${task.time}</p>
+                </div>
+                <div class="editDelSec">
+                    <div class="actExc">
+                        <p class="activeCir">Active</p>
+                        <i class="fa-solid fa-exclamation"></i>
+                    </div>
+                    <div class="edDEL">
+                        <span class="edit">Edit</span>
+                        <span class="del">Delete</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        listContainer.innerHTML += tasksContainer;
+    });
+
+    // Update active status after loading tasks
+    updateActiveTasks();
+}
+
 
 setInterval(updateActiveTasks, 1000);
 updateActiveTasks();
+loadTasksFromLocalStorage();
+
 
 
