@@ -368,7 +368,7 @@ body {
 
 .list .editDelSec div .activeCir {
     user-select: none;
-    
+    display: none;
 }
 .list .editDelSec div .activeCir::before {
     content: '';

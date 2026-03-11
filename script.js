@@ -127,6 +127,44 @@ function addTask() {
     }
 }
 
+function updateActiveTasks() {
+    const currentTime = new Date();
+    const currentMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
+
+    const lists = document.querySelectorAll(".list");
+    lists.forEach(list => {
+        const timeText = list.querySelector(".tTime").textContent; 
+        const activeCir = list.querySelector(".activeCir");
+
+        const match = timeText.match(/(\d{1,2}\.\d{1,2})\s*(am|pm)\s*-\s*(\d{1,2}\.\d{1,2})\s*(am|pm)/i);
+        if (match) {
+            const startHourMin = match[1].split('.').map(Number);
+            const startAMPM = match[2].toLowerCase();
+            const endHourMin = match[3].split('.').map(Number);
+            const endAMPM = match[4].toLowerCase();
+
+            let startHour = startHourMin[0];
+            let startMin = startHourMin[1];
+            if (startAMPM === "pm" && startHour !== 12) startHour += 12;
+            if (startAMPM === "am" && startHour === 12) startHour = 0;
+            const startTotal = startHour * 60 + startMin;
+
+            let endHour = endHourMin[0];
+            let endMin = endHourMin[1];
+            if (endAMPM === "pm" && endHour !== 12) endHour += 12;
+            if (endAMPM === "am" && endHour === 12) endHour = 0;
+            const endTotal = endHour * 60 + endMin;
+
+            if (currentMinutes >= startTotal && currentMinutes <= endTotal) {
+                activeCir.style.display = "inline-block"; 
+            } else {
+                activeCir.style.display = "none"; 
+            }
+        }
+    });
+}
+
+
 listContainer.addEventListener("click", function(e) {
     if(e.target.classList.contains("edit")) {    
         const list = e.target.closest(".list");
@@ -252,5 +290,9 @@ pendingContainer.addEventListener("click", (e) => {
         pendingListDiv.remove();
     }
 });
+
+
+setInterval(updateActiveTasks, 60000);
+updateActiveTasks();
 
 
