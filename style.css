@@ -81,6 +81,7 @@ body {
 }
 .newTask h4 {
     font-size: 1.2em;
+    user-select: none;
 }
 .newTask h4 i {
     color:rgb(74, 116, 7);
@@ -103,6 +104,7 @@ body {
     color: #a3a3a3;
     font-weight: 500;
     flex-basis: 20%;
+    user-select: none;
 }
 .newTask form div input {
     border: none;
@@ -144,6 +146,7 @@ body {
     margin-top: 0.2em;
     color: rgb(167, 30, 30);
     animation: fadeOut 2.5s forwards; 
+    user-select: none;
 }
 @keyframes fadeOut {
   0% {
@@ -329,12 +332,14 @@ body {
     font-weight: 600;
     color: #232323;
     line-height: 1.4;
+    user-select: none;
 }
 .list .task p {
     font-size: 0.8em;
     font-weight: 500;
     font-style: italic;
     color: #454444;
+    user-select: none;
 }
 .list .task p i {
     font-size: 1em;
@@ -358,11 +363,12 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    
+    width: 80%;
 }
 
 .list .editDelSec div .activeCir {
     user-select: none;
+    
 }
 .list .editDelSec div .activeCir::before {
     content: '';
@@ -385,11 +391,12 @@ body {
     background-color: rgb(130, 74, 5);
     color: white;
     font-size: 0.8em;
-    margin-left: 1.3em;
+    margin-left: auto;
     cursor: pointer;
 }
 .list .editDelSec .edDEL {
     padding: 0.2em 0em;
+    user-select: none;
 }
 .list .editDelSec .edDEL span {
     cursor: pointer;
@@ -464,8 +471,6 @@ button.pendingBtn {
     margin-left: auto;
     cursor: pointer;
 }
-
-
 
 .finishMsg {
     background-color: #242424;
