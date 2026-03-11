@@ -116,6 +116,7 @@ function addTask() {
                 </div> `;
                       
         listContainer.innerHTML += tasksContainer;
+        updateActiveTasks();
         if(listContainer.childElementCount > 0) {
             tabsSec.style.display = "block";
             allTab.classList.add("active");
@@ -292,7 +293,7 @@ pendingContainer.addEventListener("click", (e) => {
 });
 
 
-setInterval(updateActiveTasks, 60000);
+setInterval(updateActiveTasks, 1000);
 updateActiveTasks();
 
 
