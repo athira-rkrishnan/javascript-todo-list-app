@@ -385,6 +385,7 @@ function loadTasksFromLocalStorage() {
 
         clearBtn.addEventListener("click", () => {
             completedContainer.innerHTML = "";
+            localStorage.setItem("completedTasks", JSON.stringify([]));
             localStorage.setItem("clearBtnExists", false);
         });
     }
@@ -410,6 +411,7 @@ function restoreActiveTab() {
         pendingContainer.style.display = "none";
     }
     else if(activeTab === "completed") {
+       
         completeTab.classList.add("active");
         allTab.classList.remove("active");
         pendingTab.classList.remove("active");    
