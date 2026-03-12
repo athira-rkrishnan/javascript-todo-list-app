@@ -89,6 +89,7 @@ function addTask() {
             editTask.querySelector(".tTime").innerHTML =
                     `<i class="fa-regular fa-clock"></i>${inputTime.value}`;
             editTask = null;
+            saveTasksToLocalStorage();
         }
         else {
             const tasksContainer = `
@@ -268,7 +269,7 @@ tabsSec.addEventListener("click", function(e) {
         allContainer.style.display = "block";
         completedContainer.style.display = "none";
         pendingContainer.style.display = "none";
-        
+        localStorage.setItem("activeTab", "all"); 
     }
     else if(e.target.classList.contains("completeTab")) {
         completeTab.classList.add("active");
@@ -277,7 +278,7 @@ tabsSec.addEventListener("click", function(e) {
         completedContainer.style.display = "block";
         allContainer.style.display = "none";
         pendingContainer.style.display = "none"; 
-         
+        localStorage.setItem("activeTab", "completed"); 
     }
     else if(e.target.classList.contains("pendingTab")) {
         pendingTab.classList.add("active");
@@ -286,7 +287,7 @@ tabsSec.addEventListener("click", function(e) {
         pendingContainer.style.display = "block";
         allContainer.style.display = "none";
         completedContainer.style.display = "none";
-        
+        localStorage.setItem("activeTab", "pending");  
     }
 });
 
@@ -348,15 +349,50 @@ function loadTasksFromLocalStorage() {
         `;
         listContainer.innerHTML += tasksContainer;
     });
-
-    // Update active status after loading tasks
+    
+    if (listContainer.childElementCount > 0) {
+        tabsSec.style.display = "block";
+    }
+    
     updateActiveTasks();
 }
 
+function restoreActiveTab() {
+    const activeTab = localStorage.getItem("activeTab") || "all"; 
 
-setInterval(updateActiveTasks, 1000);
-updateActiveTasks();
+    if(activeTab === "all") {
+        allContainer.appendChild(listContainer);
+        allTab.classList.add("active");
+        completeTab.classList.remove("active");
+        pendingTab.classList.remove("active");
+        allContainer.style.display = "block";
+        completedContainer.style.display = "none";
+        pendingContainer.style.display = "none";
+    }
+    else if(activeTab === "completed") {
+        completeTab.classList.add("active");
+        allTab.classList.remove("active");
+        pendingTab.classList.remove("active");    
+        completedContainer.style.display = "block";
+        allContainer.style.display = "none";
+        pendingContainer.style.display = "none";  
+    }
+    else if(activeTab === "pending") {
+        pendingTab.classList.add("active");
+        allTab.classList.remove("active");
+        completeTab.classList.remove("active");
+        pendingContainer.style.display = "block";
+        allContainer.style.display = "none";
+        completedContainer.style.display = "none"; 
+    }
+}
+
 loadTasksFromLocalStorage();
+restoreActiveTab();  
+updateActiveTasks();    
+setInterval(updateActiveTasks, 1000);
+
+
 
 
 
