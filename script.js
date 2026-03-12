@@ -302,6 +302,7 @@ pendingContainer.addEventListener("click", (e) => {
 
 function saveTasksToLocalStorage() {
     const tasks = [];
+    const completedTasks = [];
     const lists = document.querySelectorAll(".list");
 
     lists.forEach(list => {
@@ -316,11 +317,21 @@ function saveTasksToLocalStorage() {
         });
     });
 
+    const compLists = document.querySelectorAll(".compLists");
+    compLists.forEach(comp => {
+        const name = comp.querySelector(".compTask").textContent.trim();
+        completedTasks.push({ 
+            name
+        });
+    });
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 }
 
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
     tasks.forEach(task => {
         const tasksContainer = `
@@ -350,7 +361,15 @@ function loadTasksFromLocalStorage() {
         listContainer.innerHTML += tasksContainer;
     });
     
-    if (listContainer.childElementCount > 0) {
+    completedTasks.forEach(task => {
+        const completeTasks = `<div class = "compLists">
+                                    <p class = "compTask"><i class="fa-solid fa-check"></i>${task.name}</p>
+                               </div>`;
+        completedContainer.innerHTML += completeTasks;
+    });
+
+
+    if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0) {
         tabsSec.style.display = "block";
     }
     
