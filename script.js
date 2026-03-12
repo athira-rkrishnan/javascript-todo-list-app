@@ -242,8 +242,11 @@ listContainer.addEventListener("click", function(e) {
                     clearBtn.classList.add("clear");
                     clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
                     completedContainer.appendChild(clearBtn);
+                    localStorage.setItem("clearBtnExists", true);
+
                     clearBtn.addEventListener("click", () => {
                         completedContainer.innerHTML = "";
+                        localStorage.setItem("clearBtnExists", false);
                         if(waitingCompletedTask) {
                             const taskName = waitingCompletedTask.querySelector(".tName").textContent;
                             moveToCompleted(waitingCompletedTask, taskName);
@@ -252,6 +255,7 @@ listContainer.addEventListener("click", function(e) {
                     });   
                 }
                 list.remove();
+                saveTasksToLocalStorage();
             }, 2000);    
             completedContainer.style.display = "none";
             saveTasksToLocalStorage();
@@ -327,11 +331,15 @@ function saveTasksToLocalStorage() {
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+    const clearBtnExists = !!document.querySelector(".completedContainer .clear");
+    localStorage.setItem("clearBtnExists", clearBtnExists);
 }
 
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+    const clearBtnExists = JSON.parse(localStorage.getItem("clearBtnExists")) || false;
 
     tasks.forEach(task => {
         const tasksContainer = `
@@ -367,6 +375,19 @@ function loadTasksFromLocalStorage() {
                                </div>`;
         completedContainer.innerHTML += completeTasks;
     });
+
+     const completedCount = completedContainer.querySelectorAll(".compLists").length;
+    if ((completedCount >= 8 || clearBtnExists) && !document.querySelector(".completedContainer .clear")) {
+        const clearBtn = document.createElement("button");
+        clearBtn.classList.add("clear");
+        clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
+        completedContainer.appendChild(clearBtn);
+
+        clearBtn.addEventListener("click", () => {
+            completedContainer.innerHTML = "";
+            localStorage.setItem("clearBtnExists", false);
+        });
+    }
 
 
     if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0) {
