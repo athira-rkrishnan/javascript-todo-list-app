@@ -298,6 +298,18 @@ tabsSec.addEventListener("click", function(e) {
 
 pendingContainer.addEventListener("click", (e) => {
     if(e.target.classList.contains("pendingBtn")) {
+         if(listContainer.childElementCount >= 6){
+            finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks
+                                   <i class="fa-solid fa-xmark alertClose"></i>`;
+            finishMsg.style.visibility = "visible";
+            finishMsg.addEventListener("click", (e) => {
+                if(e.target.classList.contains("alertClose")){
+                    finishMsg.style.visibility = "hidden";
+                }
+            });
+            return; 
+        }
+
         const pendingListDiv = e.target.closest(".pendingList");
         const taskName = pendingListDiv.querySelector(".pendingTask").textContent;
 
@@ -441,7 +453,7 @@ function loadTasksFromLocalStorage() {
     }
 
 
-    if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0) {
+    if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0 || pendingContainer.childElementCount > 0) {
         tabsSec.style.display = "block";
     }
     
