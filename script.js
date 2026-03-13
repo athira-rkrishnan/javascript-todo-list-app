@@ -299,9 +299,39 @@ tabsSec.addEventListener("click", function(e) {
 pendingContainer.addEventListener("click", (e) => {
     if(e.target.classList.contains("pendingBtn")) {
         const pendingListDiv = e.target.closest(".pendingList");
-        const originalTask = pendingListDiv.listRef;
-        listContainer.appendChild(originalTask);
+        const taskName = pendingListDiv.querySelector(".pendingTask").textContent;
+
+        const taskHTML = `
+        <div class="list">
+            <div class="checkbox-wrapper-56">
+                <label class="checkcontainer">
+                    <input type="checkbox">
+                    <div class="checkmark"></div>
+                </label>
+            </div>
+
+            <div class="task">
+                <label class="tName">${taskName}</label>
+                <p class="tTime"><i class="fa-regular fa-clock"></i></p>
+            </div>
+
+            <div class="editDelSec">
+                <div class="actExc">
+                    <p class="activeCir">Active</p>
+                    <i class="fa-solid fa-exclamation"></i>
+                </div>
+
+                <div class="edDEL">
+                    <span class="edit">Edit</span>
+                    <span class="del">Delete</span>
+                </div>
+            </div>
+        </div>
+        `;
+
+        listContainer.innerHTML += taskHTML;
         pendingListDiv.remove();
+        saveTasksToLocalStorage();
     }
 });
 
