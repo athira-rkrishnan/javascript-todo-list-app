@@ -20,8 +20,8 @@ const inputTime = document.querySelector("#time");
 const todoApp = document.querySelector(".todoapp");
 
 const listContainer = document.querySelector(".listContainer");
-const tListName = document.querySelector("tName");
-const tListTime = document.querySelector("tTime");
+const tListName = document.querySelector(".tName");
+const tListTime = document.querySelector(".tTime");
 
 const tabsSec = document.querySelector(".tabs");
 const allTab = document.querySelector(".allTab");
@@ -206,7 +206,8 @@ listContainer.addEventListener("click", function(e) {
                                     <button class = "pendingBtn">Return & Finish</button>`;
         pendingListDiv.listRef = list;
         pendingContainer.appendChild(pendingListDiv);
-        list.remove();    
+        list.remove();  
+        saveTasksToLocalStorage();  
     }
     else if(e.target.type === "checkbox") {
         const list = e.target.closest(".list");
@@ -307,6 +308,7 @@ pendingContainer.addEventListener("click", (e) => {
 function saveTasksToLocalStorage() {
     const tasks = [];
     const completedTasks = [];
+    const pendingTasks = [];
     const lists = document.querySelectorAll(".list");
 
     lists.forEach(list => {
@@ -329,8 +331,15 @@ function saveTasksToLocalStorage() {
         });
     });
 
+    const pendLists = document.querySelectorAll(".pendingList");
+    pendLists.forEach(pend => {
+        const name = pend.querySelector(".pendingTask").textContent.trim();
+        pendingTasks.push({ name });
+    });
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+    localStorage.setItem("pendingTasks", JSON.stringify(pendingTasks));
 
     const clearBtnExists = !!document.querySelector(".completedContainer .clear");
     localStorage.setItem("clearBtnExists", clearBtnExists);
@@ -340,6 +349,7 @@ function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
     const clearBtnExists = JSON.parse(localStorage.getItem("clearBtnExists")) || false;
+    const pendingTasks = JSON.parse(localStorage.getItem("pendingTasks")) || [];
 
     tasks.forEach(task => {
         const tasksContainer = `
@@ -374,6 +384,16 @@ function loadTasksFromLocalStorage() {
                                     <p class = "compTask"><i class="fa-solid fa-check"></i>${task.name}</p>
                                </div>`;
         completedContainer.innerHTML += completeTasks;
+    });
+
+    pendingTasks.forEach(task => {
+        const pendingListDiv = document.createElement("div");
+        pendingListDiv.classList.add("pendingList");
+        pendingListDiv.innerHTML = `
+            <p class="pendingTask">${task.name}</p>
+            <button class="pendingBtn">Return & Finish</button>
+            `;
+        pendingContainer.appendChild(pendingListDiv);
     });
 
      const completedCount = completedContainer.querySelectorAll(".compLists").length;
