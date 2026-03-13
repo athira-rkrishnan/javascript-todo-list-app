@@ -17,8 +17,14 @@ const newTask = document.querySelector(".newTask");
 const inputName = document.querySelector("#name");
 const inputTime = document.querySelector("#time");
 
-const todoApp = document.querySelector(".todoapp");
+const creEditText = document.getElementById("creEditText");
+const taskBtn = document.getElementById("taskBtn");
+let editTask = null;
 
+const finishMsg = document.getElementById("finishMsg");
+const alertClose = document.querySelector(".alertClose");
+
+const todoApp = document.querySelector(".todoapp");
 const listContainer = document.querySelector(".listContainer");
 const tListName = document.querySelector(".tName");
 const tListTime = document.querySelector(".tTime");
@@ -30,15 +36,6 @@ const pendingTab = document.querySelector(".pendingTab");
 const allContainer =  document.querySelector(".allContainer");
 const completedContainer =  document.querySelector(".completedContainer");
 const pendingContainer =  document.querySelector(".pendingContainer");
-
-
-const creEditText = document.getElementById("creEditText");
-const taskBtn = document.getElementById("taskBtn");
-let editTask = null;
-
-
-const finishMsg = document.getElementById("finishMsg");
-const alertClose = document.querySelector(".alertClose");
    
 function createTask() {
     if(listContainer.childElementCount >= 6 && editTask === null) {
@@ -160,12 +157,44 @@ function updateActiveTasks() {
 
             if (currentMinutes >= startTotal && currentMinutes <= endTotal) {
                 activeCir.style.display = "inline-block"; 
+                list.style.border = "1px solid #60e821";
             } else {
                 activeCir.style.display = "none"; 
+                list.style.border = ""; 
             }
         }
     });
 }
+
+function moveToCompleted(list, taskName) {
+            setTimeout(() => {
+                const completeTasks = `<div class = "compLists">
+                    <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
+                    </div>`; 
+                
+                completedContainer.innerHTML += completeTasks;
+                const newCompletedCount = completedContainer.querySelectorAll(".compLists").length;
+
+                if(newCompletedCount > 7 && !document.querySelector(".clear")) {
+                    const clearBtn = document.createElement("button");
+                    clearBtn.classList.add("clear");
+                    clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
+                    completedContainer.appendChild(clearBtn);
+                    localStorage.setItem("clearBtnExists", true);
+
+                    clearBtn.addEventListener("click", () => {
+                        completedContainer.innerHTML = "";
+                        localStorage.setItem("clearBtnExists", false);
+                        moveCheckedTasksIfPossible();                       
+                        saveTasksToLocalStorage();
+                    });   
+                }
+                list.remove();
+                saveTasksToLocalStorage();
+            }, 2000);    
+            completedContainer.style.display = "none";
+            saveTasksToLocalStorage();
+        }
 
 
 listContainer.addEventListener("click", function(e) {
@@ -213,10 +242,11 @@ listContainer.addEventListener("click", function(e) {
         const list = e.target.closest(".list");
         const taskName = list.querySelector(".tName").textContent;
         if(e.target.checked) {
-
             const completedCount = completedContainer.querySelectorAll(".compLists").length;
-            if(completedCount > 7) {
-                waitingCompletedTask = list;
+            if(completedCount >= 8) {
+                e.target.checked = true;
+
+               
                 finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Clear Completed Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
                 finishMsg.style.visibility = "visible";
                 finishMsg.addEventListener("click", (e) => {
@@ -224,46 +254,31 @@ listContainer.addEventListener("click", function(e) {
                         finishMsg.style.visibility = "hidden";
                     }
                 });
+                saveTasksToLocalStorage();
+
                 return;   
             }
             moveToCompleted(list, taskName);
         }
         
-        function moveToCompleted(list, taskName) {
-            setTimeout(() => {
-                const completeTasks = `<div class = "compLists">
-                    <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
-                    </div>`; 
-                
-                completedContainer.innerHTML += completeTasks;
-                const newCompletedCount = completedContainer.querySelectorAll(".compLists").length;
-
-                if(newCompletedCount > 7 && !document.querySelector(".clear")) {
-                    const clearBtn = document.createElement("button");
-                    clearBtn.classList.add("clear");
-                    clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
-                    completedContainer.appendChild(clearBtn);
-                    localStorage.setItem("clearBtnExists", true);
-
-                    clearBtn.addEventListener("click", () => {
-                        completedContainer.innerHTML = "";
-                        localStorage.setItem("clearBtnExists", false);
-                        if(waitingCompletedTask) {
-                            const taskName = waitingCompletedTask.querySelector(".tName").textContent;
-                            moveToCompleted(waitingCompletedTask, taskName);
-                            waitingCompletedTask = null;
-                        }
-                    });   
-                }
-                list.remove();
-                saveTasksToLocalStorage();
-            }, 2000);    
-            completedContainer.style.display = "none";
-            saveTasksToLocalStorage();
-        }
+        
     }         
 });
 
+function moveCheckedTasksIfPossible() {
+    const completedCount = completedContainer.querySelectorAll(".compLists").length;
+    if(completedCount >= 8) return;
+    const lists = document.querySelectorAll(".list");
+    lists.forEach(list => {
+        const checkbox = list.querySelector('input[type="checkbox"]');
+        if(checkbox && checkbox.checked) {
+            const taskName = list.querySelector(".tName").textContent;
+            if(completedContainer.querySelectorAll(".compLists").length < 8) {
+                moveToCompleted(list, taskName);
+            }
+        }
+    });
+}
 
 tabsSec.addEventListener("click", function(e) {
     if(e.target.classList.contains("allTab")) {
@@ -398,7 +413,7 @@ function loadTasksFromLocalStorage() {
             <div class="list">
                 <div class="checkbox-wrapper-56">
                     <label class="checkcontainer">
-                        <input type="checkbox" ${task.completed ? "checked" : ""}>
+                        <input type="checkbox" ${task.completed ? "checked" : ""} data-completed="${task.completed}">
                         <div class="checkmark"></div>
                     </label>
                 </div>
@@ -452,17 +467,14 @@ function loadTasksFromLocalStorage() {
         });
     }
 
-
     if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0 || pendingContainer.childElementCount > 0) {
         tabsSec.style.display = "block";
     }
-    
     updateActiveTasks();
 }
 
 function restoreActiveTab() {
     const activeTab = localStorage.getItem("activeTab") || "all"; 
-
     if(activeTab === "all") {
         allContainer.appendChild(listContainer);
         allTab.classList.add("active");
@@ -473,7 +485,6 @@ function restoreActiveTab() {
         pendingContainer.style.display = "none";
     }
     else if(activeTab === "completed") {
-       
         completeTab.classList.add("active");
         allTab.classList.remove("active");
         pendingTab.classList.remove("active");    
@@ -495,7 +506,7 @@ loadTasksFromLocalStorage();
 restoreActiveTab();  
 updateActiveTasks();    
 setInterval(updateActiveTasks, 1000);
-
+setTimeout(moveCheckedTasksIfPossible, 500);
 
 
 
