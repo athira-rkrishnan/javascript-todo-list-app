@@ -1,16 +1,8 @@
-
 // For Displaying Date
 const date = new Date();
 const dateStr = date.toDateString();
 const currentDate = document.getElementById("currDate");
 currentDate.innerHTML = dateStr;
-
-/*window.onload = function() {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
-};  */
 
 const overLay = document.querySelector(".overlay");
 const newTask = document.querySelector(".newTask");
@@ -42,7 +34,7 @@ function createTask() {
         overLay.classList.remove('active');
         newTask.style.display = "none";
         finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks
-        <i class="fa-solid fa-xmark alertClose"></i>`;
+                               <i class="fa-solid fa-xmark alertClose"></i>`;
         finishMsg.style.visibility = "visible";
         finishMsg.addEventListener("click", (e) => {
             if(e.target.classList.contains("alertClose")) {
@@ -69,7 +61,6 @@ function addTask() {
     const inNameValue = inputName.value;
     const inTimeValue = inputTime.value;
       
-
     if(inputName.value === '' || inputTime.value === '') {
         let alertTxt = document.createElement("p");
         alertTxt.classList.add("alertText");
@@ -78,13 +69,11 @@ function addTask() {
         alertTxt.addEventListener('animationend', () => {
             alertTxt.style.display = 'none';
         });
-
     }
     else {    
         if(editTask) {
             editTask.querySelector(".tName").textContent = inputName.value;
-            editTask.querySelector(".tTime").innerHTML =
-                    `<i class="fa-regular fa-clock"></i>${inputTime.value}`;
+            editTask.querySelector(".tTime").innerHTML = `<i class="fa-regular fa-clock"></i>${inputTime.value}`;
             editTask = null;
             saveTasksToLocalStorage();
         }
@@ -155,47 +144,54 @@ function updateActiveTasks() {
             if (endAMPM === "am" && endHour === 12) endHour = 0;
             const endTotal = endHour * 60 + endMin;
 
-            if (currentMinutes >= startTotal && currentMinutes <= endTotal) {
-                activeCir.style.display = "inline-block"; 
+            let isActive;
+
+            if (endTotal < startTotal) {
+                isActive = currentMinutes >= startTotal || currentMinutes <= endTotal;
+            } 
+            else {
+                isActive = currentMinutes >= startTotal && currentMinutes <= endTotal;
+            }
+
+            if (isActive) {
+                activeCir.style.display = "inline-block";
                 list.style.border = "1px solid #60e821";
-            } else {
-                activeCir.style.display = "none"; 
-                list.style.border = ""; 
+            } 
+            else {
+                activeCir.style.display = "none";
+                list.style.border = "";
             }
         }
     });
 }
 
 function moveToCompleted(list, taskName) {
-            setTimeout(() => {
-                const completeTasks = `<div class = "compLists">
-                    <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
-                    </div>`; 
-                
-                completedContainer.innerHTML += completeTasks;
-                const newCompletedCount = completedContainer.querySelectorAll(".compLists").length;
+    setTimeout(() => {
+        const completeTasks = `<div class = "compLists">
+                               <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>${taskName}</p>
+                               </div>`;    
+        completedContainer.innerHTML += completeTasks;
+        const newCompletedCount = completedContainer.querySelectorAll(".compLists").length;
+        if(newCompletedCount > 7 && !document.querySelector(".clear")) {
+            const clearBtn = document.createElement("button");
+            clearBtn.classList.add("clear");
+            clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
+            completedContainer.appendChild(clearBtn);
+            localStorage.setItem("clearBtnExists", true);
 
-                if(newCompletedCount > 7 && !document.querySelector(".clear")) {
-                    const clearBtn = document.createElement("button");
-                    clearBtn.classList.add("clear");
-                    clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
-                    completedContainer.appendChild(clearBtn);
-                    localStorage.setItem("clearBtnExists", true);
-
-                    clearBtn.addEventListener("click", () => {
-                        completedContainer.innerHTML = "";
-                        localStorage.setItem("clearBtnExists", false);
-                        moveCheckedTasksIfPossible();                       
-                        saveTasksToLocalStorage();
-                    });   
-                }
-                list.remove();
+            clearBtn.addEventListener("click", () => {
+                completedContainer.innerHTML = "";
+                localStorage.setItem("clearBtnExists", false);
+                moveCheckedTasksIfPossible();                       
                 saveTasksToLocalStorage();
-            }, 2000);    
-            completedContainer.style.display = "none";
-            saveTasksToLocalStorage();
+            });   
         }
-
+        list.remove();
+        saveTasksToLocalStorage();
+    }, 2000);    
+    completedContainer.style.display = "none";
+    saveTasksToLocalStorage();
+}
 
 listContainer.addEventListener("click", function(e) {
     if(e.target.classList.contains("edit")) {    
@@ -245,8 +241,6 @@ listContainer.addEventListener("click", function(e) {
             const completedCount = completedContainer.querySelectorAll(".compLists").length;
             if(completedCount >= 8) {
                 e.target.checked = true;
-
-               
                 finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Clear Completed Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
                 finishMsg.style.visibility = "visible";
                 finishMsg.addEventListener("click", (e) => {
@@ -255,13 +249,10 @@ listContainer.addEventListener("click", function(e) {
                     }
                 });
                 saveTasksToLocalStorage();
-
                 return;   
             }
             moveToCompleted(list, taskName);
-        }
-        
-        
+        }     
     }         
 });
 
@@ -313,12 +304,12 @@ tabsSec.addEventListener("click", function(e) {
 
 pendingContainer.addEventListener("click", (e) => {
     if(e.target.classList.contains("pendingBtn")) {
-         if(listContainer.childElementCount >= 6){
+        if(listContainer.childElementCount >= 6) {
             finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks
                                    <i class="fa-solid fa-xmark alertClose"></i>`;
             finishMsg.style.visibility = "visible";
             finishMsg.addEventListener("click", (e) => {
-                if(e.target.classList.contains("alertClose")){
+                if(e.target.classList.contains("alertClose")) {
                     finishMsg.style.visibility = "hidden";
                 }
             });
@@ -327,7 +318,6 @@ pendingContainer.addEventListener("click", (e) => {
 
         const pendingListDiv = e.target.closest(".pendingList");
         const taskName = pendingListDiv.querySelector(".pendingTask").textContent;
-
         const taskHTML = `
         <div class="list">
             <div class="checkbox-wrapper-56">
@@ -355,7 +345,6 @@ pendingContainer.addEventListener("click", (e) => {
             </div>
         </div>
         `;
-
         listContainer.innerHTML += taskHTML;
         pendingListDiv.remove();
         saveTasksToLocalStorage();
@@ -367,12 +356,10 @@ function saveTasksToLocalStorage() {
     const completedTasks = [];
     const pendingTasks = [];
     const lists = document.querySelectorAll(".list");
-
     lists.forEach(list => {
         const name = list.querySelector(".tName").textContent;
         const time = list.querySelector(".tTime").textContent.trim();
         const completed = list.querySelector('input[type="checkbox"]').checked;
-
         tasks.push({
             name,
             time,
@@ -446,15 +433,13 @@ function loadTasksFromLocalStorage() {
     pendingTasks.forEach(task => {
         const pendingListDiv = document.createElement("div");
         pendingListDiv.classList.add("pendingList");
-        pendingListDiv.innerHTML = `
-            <p class="pendingTask">${task.name}</p>
-            <button class="pendingBtn">Return & Finish</button>
-            `;
+        pendingListDiv.innerHTML = `<p class="pendingTask">${task.name}</p>
+                                    <button class="pendingBtn">Return & Finish</button>`;
         pendingContainer.appendChild(pendingListDiv);
     });
 
-     const completedCount = completedContainer.querySelectorAll(".compLists").length;
-    if ((completedCount >= 8 || clearBtnExists) && !document.querySelector(".completedContainer .clear")) {
+    const completedCount = completedContainer.querySelectorAll(".compLists").length;
+    if((completedCount >= 8 || clearBtnExists) && !document.querySelector(".completedContainer .clear")) {
         const clearBtn = document.createElement("button");
         clearBtn.classList.add("clear");
         clearBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>Clear All`;
@@ -467,7 +452,7 @@ function loadTasksFromLocalStorage() {
         });
     }
 
-    if (listContainer.childElementCount > 0 || completedContainer.childElementCount > 0 || pendingContainer.childElementCount > 0) {
+    if(listContainer.childElementCount > 0 || completedContainer.childElementCount > 0 || pendingContainer.childElementCount > 0) {
         tabsSec.style.display = "block";
     }
     updateActiveTasks();

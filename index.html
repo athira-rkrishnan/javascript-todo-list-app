@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
 <body>
-    <div class = "container"> <!--Conatiner Start -->
+    <div class = "container"> <!--Container Start -->
         <!-- Overlay Start -->
         <div class = "overlay">
             <div class = "newTask">
@@ -33,7 +33,6 @@
                 <button class = "plusbtn" onclick = "createTask()"><i class="fa-solid fa-plus"></i></button>
                 <span class = "tipText">Create Task</span>
             </div>
-
             
             <div class = "tabs">
                 <span class = "allTab">All</span>
@@ -42,67 +41,14 @@
             </div>
             
             <div class = "allContainer">
-                <div class = "listContainer">
-          <!--  <div class = "tabs">
-                    <span>All</span>
-                    <span>Completed</span>
-                    <span>Pending</span>
-                </div>
-                <div class = "list">
-                    <div class="checkbox-wrapper-56">
-                        <label class="checkcontainer">
-                        <input type="checkbox" id = "myCheckbox">
-                        <div class="checkmark"></div>
-                        </label>
-                    </div>
-                    <div class = "task">
-                        <label for = "myCheckbox" id = "tName">Finish JavaScript</label>
-                        <p id = "tTime"><i class="fa-regular fa-clock"></i>2.00pm - 3.00pm</p>
-                    </div>
-                    <div class = "editDelSec">
-                        <div class = "actExc">
-                            <p class = "activeCir">Active</p>
-                            <i class="fa-solid fa-exclamation"></i>
-                        </div>
-                        <div class = "edDEL">
-                            <span>Edit</span>
-                            <span class = "del">Delete</span>
-                        </div>
-                    </div>
-                </div>
-                     -->
-                </div>    
+                <div class = "listContainer"></div>    
             </div>
-            <div class = "completedContainer">
-     <!--        <div class = "compLists">
-                    <p id = "cTask" class = "compTask"><i class="fa-solid fa-check"></i>Complete Task</p>
-                    <button class = "clear"><i class="fa-solid fa-trash-can"></i>Clear All</button>
-                </div>  -->
-            </div>
-            <div class = "pendingContainer">
-             <!--   <div class = "pendingList">
-                    <p id = "pendingTask" class = "pendingTask">Pending Task</p>
-                    <button class = "pendingBtn">Restore</button>
-                </div>
-                <div class = "pendingList">
-                    <p id = "pendingTask" class = "pendingTask">Pending Task</p>
-                    <button class = "pendingBtn">Restore</button>
-                </div>
-                <div class = "pendingList">
-                    <p id = "pendingTask" class = "pendingTask">Pending Task</p>
-                    <button class = "pendingBtn">Restore</button>
-                </div>  -->
-            </div>
-
-            
-
-           
-
+            <div class = "completedContainer"></div>
+            <div class = "pendingContainer"></div>     
         </div>
         <!-- To Do App Container End -->
-         <p class = "finishMsg" id = "finishMsg"><i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks<i class="fa-solid fa-xmark alertClose"></i></p>
-    </div> <!--Conatiner End -->
-
+        <p class = "finishMsg" id = "finishMsg"><i class="fa-solid fa-triangle-exclamation"></i>Finish All Tasks<i class="fa-solid fa-xmark alertClose"></i></p>
+    </div> <!--Container End -->
 
     <script src = "script.js"></script>
     
