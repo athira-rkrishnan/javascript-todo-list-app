@@ -484,8 +484,7 @@ button.pendingBtn {
     cursor: pointer;
 }
 
-
-@media (min-width:480px) and (max-width:576px) {
+@media (min-width: 320px) and (max-width: 480px) {
     .todoapp {
         width: 90%;
         height: auto;
@@ -500,6 +499,90 @@ button.pendingBtn {
         width: 3em;
         height: 3em;
     }
+    .overlay .newTask {
+        width: 95%;
+    }
+    .newTask form div label {
+        flex-basis: 21%;
+    }
+    .todoapp .tabs span {
+        font-size: 0.8em;
+    }
+    .listContainer .list {
+        height: 20%;
+        margin-bottom: 0.6em;
+    }
+    .checkbox-wrapper-56 .checkcontainer input {
+        height: 30px;
+        width: 30px;
+    }
+    .list .task {
+        flex-basis: 64%;
+    }
+    .list .task label {
+        font-size: 0.8em;
+    }
+    .list .task p {
+        font-size: 0.6em;
+    }
+    .list .editDelSec {
+        flex-basis: 25%;
+    }
+    .list .editDelSec .actExc {
+        width: 92%;
+    }
+    .list .editDelSec div .activeCir {
+        font-size: 0.7em;
+        margin-left: 0.1em;
+    }
+    .list .editDelSec div .activeCir::before {
+        position: absolute;
+        top: 6px;
+        left: -9px
+    }
+    .list .editDelSec .actExc .fa-exclamation {
+        font-size: 0.6em;
+        margin-right: 1.5em;
+    }
+    .list .editDelSec .edDEL {
+        width: 92%;
+    }
+    .list .editDelSec .edDEL span {
+        font-size: 0.7em;
+    }
+    .completedContainer .compLists .compTask {
+        font-size: 0.8em;
+    }
+    button.clear {
+        font-size: 0.8em;
+    }
+    .pendingContainer .pendingList {
+        margin-bottom: 0em;
+        padding: 0.2em;
+    }
+    .pendingContainer .pendingList .pendingTask {
+        font-size: 0.8em;
+    }
+}
+
+@media (min-width:481px) and (max-width:576px) {
+    .todoapp {
+        width: 90%;
+        height: auto;
+    }
+    .todoapp .date {
+        font-size: 0.8em;
+    }
+    .todoapp h3 {
+        font-size: 2em;
+    }
+    .plusbtn {
+        width: 3em;
+        height: 3em;
+    }
+    .overlay .newTask {
+        width: 78%;
+    }
     .todoapp .tabs span {
         font-size: 0.8em;
     }
@@ -513,6 +596,9 @@ button.pendingBtn {
     }
     .list .task label {
         font-size: 0.8em;
+    }
+    .newTask form div label {
+        flex-basis: 22%;
     }
     .list .task p {
         font-size: 0.6em;
@@ -555,5 +641,231 @@ button.pendingBtn {
     .pendingContainer .pendingList .pendingTask {
         font-size: 0.8em;
     }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .todoapp {
+        width: 78%;
+        height: auto;
+    }
+    .todoapp .date {
+        font-size: 0.8em;
+    }
+    .todoapp h3 {
+        font-size: 2em;
+    }
+    .plusbtn {
+        width: 3.2em;
+        height: 3.2em;
+    }
+    .overlay .newTask {
+        width: 63%;
+    }
+    .todoapp .tabs span {
+        font-size: 0.8em;
+    }
+    .listContainer .list {
+        height: 20%;
+        margin-bottom: 0.6em;
+    }
+    .checkbox-wrapper-56 .checkcontainer input {
+        height: 30px;
+        width: 30px;
+    }
+    .list .task label {
+        font-size: 0.8em;
+    }
+    .list .task p {
+        font-size: 0.6em;
+    } 
+    .list .editDelSec {
+        flex-basis: 25%;
+    }
+    .list .editDelSec .actExc {
+        width: 92%;
+    } 
+    .list .editDelSec div .activeCir {
+        font-size: 0.8em;
+        margin-left: 1.2em;
+    }
+    .list .editDelSec div .activeCir::before {
+        position: absolute;
+        top: 6px;
+        left: 5px
+    }
+    .list .editDelSec .actExc .fa-exclamation {
+        font-size: 0.6em;
+        margin-right: 2.5em;
+    }
+    .list .editDelSec .edDEL {
+        width: 92%;
+    }
+    .list .editDelSec .edDEL span {
+        font-size: 0.8em;
+    }
+    .completedContainer .compLists .compTask {
+        font-size: 0.8em;
+    }
+    button.clear {
+        font-size: 0.8em;
+    }
+    .pendingContainer .pendingList {
+        margin-bottom: 0em;
+        padding: 0.2em;
+    }
+    .pendingContainer .pendingList .pendingTask {
+        font-size: 0.8em;
+    } 
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .todoapp {
+        width: 60%;
+        height: auto;
+    }
+    .todoapp .date {
+        font-size: 0.8em;
+    }
+    .todoapp h3 {
+        font-size: 2em;
+    }
+    .plusbtn {
+        width: 3.4em;
+        height: 3.4em;
+    }
+    .overlay .newTask {
+        width: 47%;
+    }
+    .todoapp .tabs span {
+        font-size: 0.8em;
+    }
+    .listContainer .list {
+        height: 20%;
+        margin-bottom: 0.6em;
+    }
+    .checkbox-wrapper-56 .checkcontainer input {
+        height: 30px;
+        width: 30px;
+    }
+    .list .task label {
+        font-size: 0.8em;
+    }
+    .list .task p {
+        font-size: 0.6em;
+    } 
+    .list .editDelSec {
+        flex-basis: 25%;
+    }
+    .list .editDelSec .actExc {
+        width: 92%;
+    } 
+    .list .editDelSec div .activeCir {
+        font-size: 0.8em;
+        margin-left: 1.2em;
+    }
+    .list .editDelSec div .activeCir::before {
+        position: absolute;
+        top: 6px;
+        left: 5px
+    }
+    .list .editDelSec .actExc .fa-exclamation {
+        font-size: 0.6em;
+        margin-right: 2.5em;
+    }
+    .list .editDelSec .edDEL {
+        width: 92%;
+    }
+    .list .editDelSec .edDEL span {
+        font-size: 0.8em;
+    }
+    .completedContainer .compLists .compTask {
+        font-size: 0.8em;
+    }
+    button.clear {
+        font-size: 0.8em;
+    }
+    .pendingContainer .pendingList {
+        margin-bottom: 0em;
+        padding: 0.2em;
+    }
+    .pendingContainer .pendingList .pendingTask {
+        font-size: 0.8em;
+    } 
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .todoapp {
+        width: 50%;
+        height: auto;
+    }
+    .todoapp .date {
+        font-size: 0.9em;
+    }
+    .todoapp h3 {
+        font-size: 2.5em;
+    }
+    .plusbtn {
+        width: 3.5em;
+        height: 3.5em;
+    }
+    .todoapp .tabs span {
+        font-size: 1em;
+    }
+    .listContainer .list {
+        height: 20%;
+        margin-bottom: 0.8em;
+    }
+    .checkbox-wrapper-56 .checkcontainer input {
+        height: 32px;
+        width: 32px;
+    }
+    .list .task label {
+        font-size: 1em;
+    }
+    .list .task p {
+        font-size: 0.8em;
+    } 
+    .list .editDelSec {
+        flex-basis: 25%;
+    }
+    .list .editDelSec .actExc {
+        width: 92%;
+    } 
+    .list .editDelSec div .activeCir {
+        font-size: 0.9em;
+        margin-left: 1.7em;
+    }
+    .list .editDelSec div .activeCir::before {
+        position: absolute;
+        top: 7px;
+        left: 13px;
+        width: 7px;
+        height: 7px;
+    }
+    .list .editDelSec .actExc .fa-exclamation {
+        font-size: 0.6em;
+        margin-right: 3em;
+        width: 1.8em;
+        height: 1.8em;
+    }
+    .list .editDelSec .edDEL {
+        width: 92%;
+    }
+    .list .editDelSec .edDEL span {
+        font-size: 0.9em;
+    }
+    .completedContainer .compLists .compTask {
+        font-size: 1em;
+    }
+    button.clear {
+        font-size: 0.9em;
+    }
+    .pendingContainer .pendingList {
+        margin-bottom: 0em;
+        padding: 0.2em;
+    }
+    .pendingContainer .pendingList .pendingTask {
+        font-size: 1em;
+    } 
 }
 
