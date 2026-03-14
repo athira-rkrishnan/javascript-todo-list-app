@@ -499,6 +499,11 @@ button.pendingBtn {
         width: 3em;
         height: 3em;
     }
+    .tooltip .tipText {
+        position: absolute;
+        top: 45%;
+        left: 15%;
+    }
     .overlay .newTask {
         width: 95%;
     }
@@ -658,6 +663,11 @@ button.pendingBtn {
         width: 3.2em;
         height: 3.2em;
     }
+    .tooltip .tipText {
+        position: absolute;
+        top: 45%;
+        left: 26%;
+    }
     .overlay .newTask {
         width: 63%;
     }
@@ -733,6 +743,11 @@ button.pendingBtn {
         width: 3.4em;
         height: 3.4em;
     }
+    .tooltip .tipText {
+        position: absolute;
+        top: 45%;
+        left: 26%;
+    }
     .overlay .newTask {
         width: 47%;
     }
@@ -807,6 +822,11 @@ button.pendingBtn {
     .plusbtn {
         width: 3.5em;
         height: 3.5em;
+    }
+    .tooltip .tipText {
+        position: absolute;
+        top: 45%;
+        left: 30%;
     }
     .todoapp .tabs span {
         font-size: 1em;

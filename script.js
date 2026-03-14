@@ -28,7 +28,8 @@ const pendingTab = document.querySelector(".pendingTab");
 const allContainer =  document.querySelector(".allContainer");
 const completedContainer =  document.querySelector(".completedContainer");
 const pendingContainer =  document.querySelector(".pendingContainer");
-   
+
+// Opens the overlay to create or edit a task
 function createTask() {
     if(listContainer.childElementCount >= 6 && editTask === null) {
         overLay.classList.remove('active');
@@ -50,6 +51,7 @@ function createTask() {
     }
 }
 
+// Closes the task overlay and resets input fields
 function closeTask() {
     overLay.classList.remove('active');
     newTask.style.display = "none";
@@ -57,6 +59,7 @@ function closeTask() {
     inputTime.value = ""; 
 }
 
+// Adds a new task or updates an existing task
 function addTask() {
     const inNameValue = inputName.value;
     const inTimeValue = inputTime.value;
@@ -102,12 +105,12 @@ function addTask() {
                     </div>
                 </div> `;
                       
-        listContainer.innerHTML += tasksContainer;
-        updateActiveTasks();
-        saveTasksToLocalStorage();
-        if(listContainer.childElementCount > 0) {
-            tabsSec.style.display = "block";
-            allTab.classList.add("active");
+            listContainer.innerHTML += tasksContainer;
+            updateActiveTasks();
+            saveTasksToLocalStorage();
+            if(listContainer.childElementCount > 0) {
+                tabsSec.style.display = "block";
+                allTab.classList.add("active");
             }  
         }
         creEditText.textContent = "Create";
@@ -116,6 +119,7 @@ function addTask() {
     }
 }
 
+// Updates the "Active" indicator for tasks based on current time
 function updateActiveTasks() {
     const currentTime = new Date();
     const currentMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
@@ -145,7 +149,6 @@ function updateActiveTasks() {
             const endTotal = endHour * 60 + endMin;
 
             let isActive;
-
             if (endTotal < startTotal) {
                 isActive = currentMinutes >= startTotal || currentMinutes <= endTotal;
             } 
@@ -165,6 +168,7 @@ function updateActiveTasks() {
     });
 }
 
+// Moves a task from active list to completed list after delay
 function moveToCompleted(list, taskName) {
     setTimeout(() => {
         const completeTasks = `<div class = "compLists">
@@ -193,6 +197,7 @@ function moveToCompleted(list, taskName) {
     saveTasksToLocalStorage();
 }
 
+// Event listener for task list to handle edit, delete, complete, and pending actions
 listContainer.addEventListener("click", function(e) {
     if(e.target.classList.contains("edit")) {    
         const list = e.target.closest(".list");
@@ -217,13 +222,13 @@ listContainer.addEventListener("click", function(e) {
         if(pendingContainer.childElementCount >=8) {
             selectedPendingTask = list;
             finishMsg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>Finish Pending Tasks<i class="fa-solid fa-xmark alertClose"></i>`;
-                finishMsg.style.visibility = "visible";
-                finishMsg.addEventListener("click", (e) => {
-                    if(e.target.classList.contains("alertClose")) {
-                        finishMsg.style.visibility = "hidden";
-                    }
-                });
-                return;  
+            finishMsg.style.visibility = "visible";
+            finishMsg.addEventListener("click", (e) => {
+                if(e.target.classList.contains("alertClose")) {
+                    finishMsg.style.visibility = "hidden";
+                }
+            });
+            return;  
         }
         const pendingListDiv = document.createElement("div");
         pendingListDiv.classList.add("pendingList");
@@ -256,6 +261,7 @@ listContainer.addEventListener("click", function(e) {
     }         
 });
 
+// Moves checked tasks to completed list if space is available
 function moveCheckedTasksIfPossible() {
     const completedCount = completedContainer.querySelectorAll(".compLists").length;
     if(completedCount >= 8) return;
@@ -271,6 +277,7 @@ function moveCheckedTasksIfPossible() {
     });
 }
 
+// Handles tab switching between "All", "Completed", and "Pending" views
 tabsSec.addEventListener("click", function(e) {
     if(e.target.classList.contains("allTab")) {
         allContainer.appendChild(listContainer);
@@ -302,6 +309,7 @@ tabsSec.addEventListener("click", function(e) {
     }
 });
 
+// Handles pending tasks to return them to active list
 pendingContainer.addEventListener("click", (e) => {
     if(e.target.classList.contains("pendingBtn")) {
         if(listContainer.childElementCount >= 6) {
@@ -351,6 +359,7 @@ pendingContainer.addEventListener("click", (e) => {
     }
 });
 
+// Saves all tasks, completed, and pending tasks to localStorage
 function saveTasksToLocalStorage() {
     const tasks = [];
     const completedTasks = [];
@@ -389,6 +398,7 @@ function saveTasksToLocalStorage() {
     localStorage.setItem("clearBtnExists", clearBtnExists);
 }
 
+// Loads tasks, completed, and pending tasks from localStorage on page load
 function loadTasksFromLocalStorage() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
@@ -458,6 +468,7 @@ function loadTasksFromLocalStorage() {
     updateActiveTasks();
 }
 
+// Restores the last active tab view when page loads
 function restoreActiveTab() {
     const activeTab = localStorage.getItem("activeTab") || "all"; 
     if(activeTab === "all") {
