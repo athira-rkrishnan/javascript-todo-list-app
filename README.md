@@ -13,7 +13,7 @@ A stylish, responsive, and feature-rich To-Do List web application built with HT
 * User-friendly UI with smooth animations and a responsive design.
 
 ## Demo 
-**To Do List App Demo:** [View]()
+![To Do List App Demo](https://raw.githubusercontent.com/athira-rkrishnan/javascript-todo-list-app/e060d659e8a0bb32dc5497776b569a6744cdb2b8/assets/ToDoList-Demo.gif)
 
 ## Deployment
 This project is hosted on multiple platforms:
@@ -34,7 +34,7 @@ This project is hosted on multiple platforms:
 <td align="center">
 <h4>Create Task Popup</h4>
 <a href="assets/CreateTask-Popup.png">
-    <img src="assets/CreateTask-Popup.png" width="450" height="300">
+    <img src="assets/CreateTask-Popup.png" width="450" height="auto">
 </a>
 </td>
 </tr>
@@ -43,7 +43,7 @@ This project is hosted on multiple platforms:
 <td align="center">
 <h4>All Tasks</h4>
 <a href="assets/All-Tasks-MainPage.png">
-    <img src="assets/All-Tasks-MainPage.png" width="450" height="350">
+    <img src="assets/All-Tasks-MainPage.png" width="450" height="auto">
 </a>
 </td>
 <td align="center">
@@ -85,19 +85,19 @@ Active tasks are highlighted with:
 - Green border
 - "Active" indicator
 
-### 3️⃣ Task Completion
+### 3. Task Completion
 When a task checkbox is selected:
 - The task moves to the **Completed section**
 - A maximum of **8 completed tasks** are allowed
 - If exceeded, the user must clear completed tasks
 
-### 4️⃣ Pending Tasks
+### 4. Pending Tasks
 Tasks can be moved to the **Pending section** if they are not completed.
 Pending tasks can later be:
 - Returned to the main list
 - Completed normally
 
-### 5️⃣ Data Persistence
+### 5. Data Persistence
 All tasks are stored in **LocalStorage**, so:
 - Tasks remain even after refreshing the page
 - Tabs and completed/pending states are preserved
